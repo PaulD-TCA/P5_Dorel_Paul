@@ -2,15 +2,15 @@
 Utilisez les données publiques de l'OpenFoodFacts
 
 # Enoncé
-La startup Pur Beurre possède le restaurant Ratatouille. Ses clients souhaitent changer leurs habitudes alimentaire. Pour les aider, la société Pur Beurre à besoin d'un programme qui proposera à ses utilisateurs des substitus sain aux aliments qu'ils auront séléctionnés.
+La startup Pur Beurre possède le restaurant Ratatouille. Ses clients souhaitent changer leurs habitudes alimentaire. Pour les aider, la société Pur Beurre à besoin d'un programme qui proposera à ses utilisateurs des substituts sain aux aliments qu'ils auront sélectionnés.
 
 # Notice d'utilisation du programme
 L'utilisateur fait ses choix dans en entrant les numéros associés aux menus
 - L'utilisateur démarre le programme
 - Le terminal affiche 3 choix.
-	- 1 Quels aliments souaitez-vous remplacer?
+	- 1 Quels aliments souhaitez-vous remplacer?
 	=> L'utilisateur choisit dans une liste de catégories puis des aliments
-	- 2 Retrouver mes aliements substitués
+	- 2 Retrouver mes aliments substitués
 	=> L'utilisateur peut afficher le résultat de recherches précédentes
 	- 3 Quitter 
 
