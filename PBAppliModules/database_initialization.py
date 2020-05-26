@@ -6,9 +6,9 @@ import mysql.connector
 
 class database_ini:
 	def __init__(self):
-		self.host = "localhost"
-		self.user = "non-root"
-		self.password = "123"
+		self.host = ""
+		self.user = ""
+		self.password = ""
 		self.database = "purbeurredb"
 
 	def db_ini(self):# purbeurre data base initialisation
