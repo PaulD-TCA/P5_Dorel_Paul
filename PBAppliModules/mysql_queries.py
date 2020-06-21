@@ -1,6 +1,10 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+DROP_DB = ("DROP DATABASE IF EXISTS purbeurredb")
+
+CREATE_DB = ("CREATE DATABASE purbeurredb")
+
 TABLES = {}
 
 TABLES['Products'] = (
@@ -12,9 +16,8 @@ TABLES['Products'] = (
     "  `p_ingredients_text` varchar(2000),"
     "  `p_store` varchar(200),"
     "  `p_categories_tags` varchar(1000),"
-    "  `p_categories_hierarchy` varchar(1000),"
     "  `p_url` varchar(1000),"
-    "  `categories_id` tinyint(3),"
+    "  `categories_id` int,"
     "  PRIMARY KEY (`p_id`)"
     ") ENGINE=InnoDB")
 
@@ -34,16 +37,15 @@ TABLES['Backup'] = (
     ") ENGINE=InnoDB")
 
 DATA_PRODUCTS = ("INSERT INTO Products "
-                "(p_code, p_name, p_nutrition_grade_fr, p_ingredients_text,"
-                " p_store, p_categories_tags, p_categories_hierarchy, p_url,"
-                " categories_id) "
-                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+                "(p_code, p_name, p_nutrition_grade_fr, p_ingredients_text, "
+                " p_store, p_categories_tags, p_url, categories_id) "
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 
 DATA_CATEGORIES = ("INSERT IGNORE INTO Categories "
                     "(c_id, c_name) "
                     "VALUES (%(c_idtofill)s, %(categorie)s)")
 
-JUNCK_FOOD = ("SELECT p_name, p_nutrition_grade_fr, p_categories_hierarchy "
+JUNCK_FOOD = ("SELECT p_name, p_nutrition_grade_fr, p_categories_tags "
             "FROM Products "
             "WHERE categories_id = %s "
             "AND (p_nutrition_grade_fr = 'D' "
@@ -51,7 +53,7 @@ JUNCK_FOOD = ("SELECT p_name, p_nutrition_grade_fr, p_categories_hierarchy "
 
 HEALTHY_FOOD = ("SELECT p_id, p_name, p_nutrition_grade_fr, "
                 "p_ingredients_text, p_store, p_url FROM Products "
-                "WHERE p_categories_hierarchy LIKE %s "
+                "WHERE p_categories_tags LIKE %s "
                 "AND (p_nutrition_grade_fr = 'A' "
                 "OR p_nutrition_grade_fr = 'B')")
 
