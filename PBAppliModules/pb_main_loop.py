@@ -3,35 +3,46 @@
 
 import mysql.connector
 
-#modules import
+from PBAppliModules import constants
+from PBAppliModules import user_data
+from PBAppliModules import mysql_queries
 
-#from PBAppliModules import PBeurre_Screen1, PBeurre_Screen2, PBeurre_Screen3, constants
-from PBAppliModules import mysql_queries, user_data, constants
-from PBAppliModules import pbeurre_screen1
-from PBAppliModules import pbeurre_screen2
+class AppliManagement:
 
-class AppliManagement:#pb_main_loop
-#    def __init__(self):
+    """
+    Manage the program flow.
+    """
 
-#        self.cnx = mysql.connector.connect(user = user_data.DATA["user"],
-#                                        password = user_data.DATA["password"],
-#                                        host = user_data.DATA["host"],
-#                                        database = constants.DB_NAME)
-#        self.cursor = self.cnx.cursor()
-
-
-    def appli_main_loop(self, sc1, sc2, sc3):
-        #Instances creation
-
+    def appli_main_loop(self, sc1, sc2, sc3, uc):
+        """
+        Mains loop who display each screens following user choises:
+        @type sc1: class instance
+        @param sc1: Display the welcome screen and the backup screen.
+        @type sc2: class instance
+        @param sc2: Display the categories screen and results of
+                    the junk food query.
+        @type sc3: class instance
+        @param sc3: Display a substitution product and save it.
+        @type uc: class instance
+        @param: uc: Force the user to type a number in the choice liste only and
+                    memorize user choices.
+        @return: The loop will continue until the user close the program.
+        """
         appli_running = "on"
         while appli_running == "on":
-            sc1.welcome(constants)
-            if sc1.user_choice_welcome == "1":
-                sc2.categories_display(constants)
-                sc2.lookforproducts(mysql_queries, constants)
-#                print("mainloop"+sc2.result_for_substitution)
-                sc2.substitution(mysql_queries, constants)
-
-            else:
+            sc1.welcome(constants, uc)
+            if uc.user_entry == "1":
+                sc2.categories_display(constants, uc)
+                sc2.lookforproducts(constants, user_data, mysql_queries, uc)
+                sc3.substitution(constants, user_data, mysql_queries, sc2, uc)
+                if uc.user_entry == "1":
+                    sc3.substitution_backup(constants, user_data, mysql_queries)
+                elif uc.user_entry == "2":
+                    continue
+                elif uc.user_entry == "3":
+                    appli_running = "off"
+            elif uc.user_entry == "2":
+                sc1.backup_display(constants, user_data, mysql_queries)
+            elif uc.user_entry == "3":
                 appli_running = "off"
             continue
