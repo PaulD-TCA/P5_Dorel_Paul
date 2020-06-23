@@ -1,6 +1,6 @@
 DATA = {
-"host": "your_host",
-"user": "your_user",
-"password": "your_password",
+"host": "localhost",
+"user": "non-root",
+"password": "123",
 "database": "purbeurredb"
 }
